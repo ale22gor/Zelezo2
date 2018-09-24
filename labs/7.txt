@@ -1,0 +1,195 @@
+R1
+no ip domain-lookup
+hostname R1
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+Line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 4
+password cisco
+login
+transport input telnet
+
+interface f0/1 
+ip address 192.168.10.1 255.255.255.0
+no sh
+exit
+
+interface loopback 0
+ip address 192.168.20.1 255.255.255.0
+no sh
+exit
+
+inteface s0/0/0 
+ip address 10.1.1.1 255.255.255.252
+clock rate 128000
+no sh 
+exit
+
+router rip
+version 2
+network 192.168.10.0
+network 192.168.20.0
+network 10.0.0.0
+no auto-summary
+
+ip access-list standard BRANCH-OFFICE-POLICY
+permit host 192.168.30.3
+permit 192.168.40.0 0.0.0.255
+end
+
+interface g0/1
+ip access-group BRANCH-OFFICE-POLICY out
+exit
+ip access-list standard BRANCH-OFFICE-POLICY
+30 permit 209.165.200.224 0.0.0.31
+40 deny any
+end
+
+ISP
+
+no ip domain-lookup
+hostname ISP
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+Line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 4
+password cisco
+login
+transport input telnet
+
+interface s0/0/0 
+ip address 10.1.1.2 255.255.255.252
+no sh
+exit
+
+interface loopback 0
+ip address 209.165.200.225 255.255.255.224
+no sh
+exit
+
+inteface s0/0/0 
+ip address 10.2.2.2 255.255.255.252
+clock rate 128000
+no sh 
+exit
+
+router rip
+version 2
+network 209.165.200.224
+network 10.0.0.0
+no auto-summary
+
+R3
+no ip domain-lookup
+hostname R3
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+Line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 4
+password cisco
+login
+transport input telnet
+
+interface f0/1 
+ip address 192.168.30.1 255.255.255.0
+no sh
+exit
+
+interface loopback 0
+ip address 192.168.40.1 255.255.255.0
+no sh
+exit
+
+inteface s0/0/1 
+ip address 10.2.2.1 255.255.255.252
+clock rate 128000
+no sh 
+exit
+
+router rip
+version 2
+network 192.168.40.0
+network 192.168.30.0
+network 10.0.0.0
+no auto-summary
+
+access-list 1 remark Allow R1 LANs Access
+access-list 1 permit 192.168.10.0 0.0.0.255
+access-list 1 permit 192.168.20.0 0.0.0.255
+access-list 1 deny any
+
+interface g0/1
+ip access-group 1 out
+
+S1
+no ip domain-lookup
+hstname S1
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+Line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 15
+password cisco
+login
+transport input telnet
+exit
+
+interface vlan 1 
+ip address 192.168.10.11 255.255.255.0
+no sh
+exit
+
+ip default-gateway 192.168.10.1
+
+S3
+no ip domain-lookup
+hstname S3
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+Line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 15
+password cisco
+login
+transport input telnet
+exit
+
+interface vlan 1 
+ip address 192.168.30.11 255.255.255.0
+no sh
+exit
+
+ip default-gateway 192.168.30.1
+
+
+
+
+
