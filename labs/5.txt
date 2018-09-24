@@ -1,0 +1,32 @@
+no ip domain-lookup
+hostname S1
+
+
+banner motd #
+ya ne loh #
+
+Line con 0
+password cisco
+login
+logging synchronous
+line vty 0 15
+password cisco
+login
+exit
+
+configure terminal
+vlan 99
+exit
+
+interface vlan99
+ip address 192.168.1.2 255.255.255.0
+no shutdown
+exit
+
+f0/1 – 24
+switchport access vlan 99
+exit
+
+default-gateway 192.168.1.1
+
+

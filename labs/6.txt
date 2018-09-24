@@ -1,0 +1,70 @@
+no ip domain-lookup
+
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+line con 0
+password cisco
+login
+logging synchronous
+exit
+
+line vty 0 15
+password cisco
+logging synchronous
+login
+exit
+
+S2
+hostname S2
+
+vlan 10
+name Student
+vlan 20
+name Faculty
+vlan 99
+name Management
+
+interface VLAN 99
+ip address 192.168.1.12 255.255.255.0
+exit
+
+interface range f0/11-23 ,6
+switchport mode access
+switchport access vlan 10
+end
+
+interface f0/1
+switchport mode trunk
+
+
+S1
+hostname S1
+
+vlan 10
+name Student
+vlan 20
+name Faculty
+vlan 99
+name Management
+
+interface VLAN 99
+ip address 192.168.1.11 255.255.255.0
+exit
+
+interface range f0/6-17 ,19-24
+switchport mode access
+switchport access vlan 10
+end
+
+interface range f0/18,
+switchport mode access
+switchport access vlan 20
+end
+
+interface f0/1
+switchport mode trunk
+
+
+
+
