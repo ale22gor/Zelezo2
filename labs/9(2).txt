@@ -22,7 +22,7 @@ ip address 192.168.1.1 255.255.255.0
 no sh
 exit
 
-interface s0/0/1
+interface s0/1/1
 ip address 209.165.201.18 255.255.255.252
 no sh
 exit
@@ -33,9 +33,9 @@ access-list 1 permit 192.168.1.0 0.0.0.255
 
 ip nat inside source list 1 interface serial 0/0/1 overload
 
-interface g0/1
+interface f0/1
 ip nat inside
-interface s0/0/1
+interface s0/1/1
 ip nat outside
 
 /**********************************************************/
@@ -65,7 +65,7 @@ login
 
 
 
-interface s0/0/0
+interface s0/1/0
 ip address 209.165.201.17 255.255.255.252
 clock rate 128000
 no sh
