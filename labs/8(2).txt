@@ -16,6 +16,7 @@ logging synchronous
 line vty 0 4
 password cisco
 login
+exit
 
 interface f0/1 
 ip address 192.168.1.10 255.255.255.0
@@ -27,7 +28,7 @@ ip address 209.165.200.225 255.255.255.224
 no sh
 exit
 
-ip route 192.168.2.0 255.255.255.0 g0/1
+ip route 192.168.2.0 255.255.255.0 f0/1
 
 S1
 en
@@ -64,6 +65,7 @@ ip dhcp pool DHCP1
 network 192.168.1.0 255.255.255.0
 default-router 192.168.1.1
 dns-server 192.168.1.9
+exit
 
 interface f0/6
 switchport access vlan 2
@@ -72,6 +74,7 @@ ip dhcp pool DHCP2
 network 192.168.2.0 255.255.255.0
 default-router 192.168.2.1
 dns-server 192.168.2.9
+exit
 
 ip routing
 ip route 0.0.0.0 0.0.0.0 192.168.1.10
