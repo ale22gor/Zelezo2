@@ -111,12 +111,13 @@ exit
 interface range f0/5 – 6
 switchport mode access
 switchport access vlan 10
+no sh
 exit
 
 interface vlan 10
 ip address 192.168.10.11 255.255.255.0
-
-
+no sh
 exit
+
 ip default-gateway 192.168.10.1
 
