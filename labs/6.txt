@@ -9,6 +9,7 @@ no ip domain-lookup
 
 banner motd #
 Unauthorized access is strictly prohibited. #
+
 line con 0
 password cisco
 login
@@ -29,15 +30,25 @@ name Management
 
 interface VLAN 99
 ip address 192.168.1.12 255.255.255.0
+no sh
 exit
 
-interface range f0/11-23 ,6
+interface range f0/11-23 
 switchport mode access
 switchport access vlan 10
-end
+no sh
+exit
+
+interface f0/6
+switchport mode access
+switchport access vlan 10
+no sh
+exit
 
 interface f0/1
 switchport mode trunk
+no sh
+exit
 
 
 S1
@@ -72,18 +83,25 @@ interface VLAN 99
 ip address 192.168.1.11 255.255.255.0
 exit
 
-interface range f0/6-17 ,19-24
+interface range f0/6-17 
 switchport mode access
 switchport access vlan 10
-end
+exit
 
-interface range f0/18,
+interface range f0/19-24
+switchport mode access
+switchport access vlan 10
+exit
+
+interface range f0/18
 switchport mode access
 switchport access vlan 20
-end
+exit
 
 interface f0/1
 switchport mode trunk
+no sh
+exit
 
 
 
