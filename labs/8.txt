@@ -15,6 +15,7 @@ logging synchronous
 line vty 0 4
 password cisco
 login
+exit
 
 interface f0/0
 ip address 192.168.0.1 255.255.255.0
@@ -26,7 +27,7 @@ ip address 192.168.1.1 255.255.255.0
 no sh
 exit
 
-interface s0/0/0
+interface s0/1/0
 ip address 192.168.2.253 255.255.255.252
 clock rate 128000
 no sh
@@ -62,13 +63,14 @@ logging synchronous
 line vty 0 4
 password cisco
 login
+exit
 
-interface s0/0/0
+interface S0/1/0
 ip address 192.168.2.254 255.255.255.252
 no sh
 exit
 
-interface s0/0/1
+interface S0/1/1
 ip address 192.168.2.226 255.255.255.224
 clock rate 128000
 no sh
@@ -96,7 +98,7 @@ network 192.168.0.0 255.255.255.0
 default-router 192.168.0.1
 dns-server 209.165.200.225
 domain-name ccna-lab.com
-
+exit
 
 ISP
 en
@@ -116,7 +118,7 @@ line vty 0 4
 password cisco
 login
 
-interface s0/0/1
+interface s0/1/1
 ip address 209.165.200.225 255.255.255.252
 no sh
 exit
