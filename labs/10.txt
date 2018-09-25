@@ -1,0 +1,41 @@
+R1
+no ip domain-lookup
+hostname R1
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+Line con 0
+password cisco
+login
+logging synchronous
+line vty 0 4
+password cisco
+login
+exit
+
+interface f0/1
+ip address 192.168.1.1 255.255.255.0
+no sh
+exit
+
+S1
+no ip domain-lookup
+hostname S1
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+Line con 0
+password cisco
+login
+logging synchronous
+line vty 0 15
+password cisco
+login
+exit
+
+interface vlan 1 
+ip address 192.168.1.11 255.255.255.0
+no sh
+exit
+
+ip default-gateway 192.168.1.1
