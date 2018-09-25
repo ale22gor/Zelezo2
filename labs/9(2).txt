@@ -1,0 +1,79 @@
+
+Gateway
+en 
+conf t
+hostname Gateway
+no ip domain-lookup
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+Line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 4
+password cisco
+login
+
+interface f0/1
+ip address 192.168.1.1 255.255.255.0
+no sh
+exit
+
+interface s0/0/1
+ip address 209.165.201.18 255.255.255.252
+no sh
+exit
+
+ip route 0.0.0.0 0.0.0.0 209.165.201.17
+
+access-list 1 permit 192.168.1.0 0.0.0.255
+
+ip nat inside source list 1 interface serial 0/0/1 overload
+
+interface g0/1
+ip nat inside
+interface s0/0/1
+ip nat outside
+
+/**********************************************************/
+ip nat pool public_access 209.165.200.225 209.165.200.230
+netmask 255.255.255.248
+
+ip nat inside source list 1 pool public_access overload
+/**********************************************************/
+ISP
+
+en 
+conf t
+hostname ISP
+no ip domain-lookup
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+Line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 4
+password cisco
+login
+
+
+
+interface s0/0/0
+ip address 209.165.201.17 255.255.255.252
+clock rate 128000
+no sh
+exit
+
+interface loopback 0
+ip address 192.31.7.1 255.255.255.255
+no sh 
+exit
+
+ip route 209.165.200.224 255.255.255.248 209.165.201.18
