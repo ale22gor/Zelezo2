@@ -1,5 +1,11 @@
-no ip domain-lookup
 
+
+S2
+en
+conf t
+hostname S2
+
+no ip domain-lookup
 
 banner motd #
 Unauthorized access is strictly prohibited. #
@@ -7,16 +13,12 @@ line con 0
 password cisco
 login
 logging synchronous
-exit
 
 line vty 0 15
 password cisco
 logging synchronous
 login
 exit
-
-S2
-hostname S2
 
 vlan 10
 name Student
@@ -39,7 +41,25 @@ switchport mode trunk
 
 
 S1
+en 
+conf t
 hostname S1
+
+no ip domain-lookup
+
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 15
+password cisco
+logging synchronous
+login
+exit
 
 vlan 10
 name Student
