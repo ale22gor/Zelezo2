@@ -18,7 +18,6 @@ password cisco
 login
 exit
 
-configure terminal
 vlan 99
 exit
 
@@ -27,7 +26,7 @@ ip address 192.168.1.2 255.255.255.0
 no shutdown
 exit
 
-f0/1 – 24
+interface range f0/1 – 24
 switchport mode access
 switchport access vlan 99
 exit
