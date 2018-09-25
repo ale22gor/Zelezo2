@@ -1,0 +1,124 @@
+R1
+en
+conf t
+hostname R1
+no ip domain-lookup
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 4
+password cisco
+login
+
+interface f0/0
+ip address 192.168.0.1 255.255.255.0
+no sh
+exit
+
+interface f0/1
+ip address 192.168.1.1 255.255.255.0
+no sh
+exit
+
+interface s0/0/0
+ip address 192.168.2.253 255.255.255.252
+clock rate 128000
+no sh
+exit
+
+router rip
+version 2
+network 192.168.0.0
+network 192.168.1.0
+network 192.168.2.252
+no auto-summary
+
+interface f0/0
+ip helper-address 192.168.2.254
+exit
+interface f0/1
+ip helper-address 192.168.2.254
+
+R2
+en
+conf t
+hostname R2
+no ip domain-lookup
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 4
+password cisco
+login
+
+interface s0/0/0
+ip address 192.168.2.254 255.255.255.252
+no sh
+exit
+
+interface s0/0/1
+ip address 192.168.2.226 255.255.255.224
+clock rate 128000
+no sh
+exit
+
+ip route 0.0.0.0 0.0.0.0 209.165.200.225
+
+router rip
+version 2
+network 192.168.2.252
+default-information originate
+exit
+
+ip dhcp excluded-address 192.168.0.1 192.168.0.10
+ip dhcp excluded-address 192.168.1.1 192.168.1.10
+ip dhcp pool R1G1
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.1
+dns-server 209.165.200.225
+domain-name ccna-lab.com
+exit
+
+ip dhcp pool R1G0
+network 192.168.0.0 255.255.255.0
+default-router 192.168.0.1
+dns-server 209.165.200.225
+domain-name ccna-lab.com
+
+
+ISP
+en
+conf t
+hostname ISP
+no ip domain-lookup
+
+banner motd #
+Unauthorized access is strictly prohibited. #
+
+line con 0
+password cisco
+login
+logging synchronous
+
+line vty 0 4
+password cisco
+login
+
+interface s0/0/1
+ip address 209.165.200.225 255.255.255.252
+no sh
+exit
+
+ip route 192.168.0.0 255.255.252.0 209.165.200.226
