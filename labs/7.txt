@@ -1,4 +1,6 @@
 R1
+en
+conf t
 no ip domain-lookup
 hostname R1
 
@@ -14,6 +16,7 @@ line vty 0 4
 password cisco
 login
 transport input telnet
+exit
 
 interface f0/1 
 ip address 192.168.10.1 255.255.255.0
@@ -52,6 +55,8 @@ ip access-list standard BRANCH-OFFICE-POLICY
 end
 
 ISP
+en
+conf t
 
 no ip domain-lookup
 hostname ISP
@@ -79,7 +84,7 @@ ip address 209.165.200.225 255.255.255.224
 no sh
 exit
 
-inteface s0/0/0 
+inteface s0/0/1
 ip address 10.2.2.2 255.255.255.252
 clock rate 128000
 no sh 
@@ -92,6 +97,8 @@ network 10.0.0.0
 no auto-summary
 
 R3
+en
+conf t
 no ip domain-lookup
 hostname R3
 
@@ -107,6 +114,7 @@ line vty 0 4
 password cisco
 login
 transport input telnet
+exit
 
 interface f0/1 
 ip address 192.168.30.1 255.255.255.0
@@ -134,12 +142,14 @@ no auto-summary
 access-list 1 remark Allow R1 LANs Access
 access-list 1 permit 192.168.10.0 0.0.0.255
 access-list 1 permit 192.168.20.0 0.0.0.255
-access-list 1 deny any
+
 
 interface g0/1
 ip access-group 1 out
 
 S1
+en
+conf t
 no ip domain-lookup
 hstname S1
 
@@ -165,6 +175,8 @@ exit
 ip default-gateway 192.168.10.1
 
 S3
+en
+conf t
 no ip domain-lookup
 hstname S3
 
