@@ -28,7 +28,7 @@ ip address 192.168.20.1 255.255.255.0
 no sh
 exit
 
-inteface s0/0/0 
+interface s0/1/0 
 ip address 10.1.1.1 255.255.255.252
 clock rate 128000
 no sh 
@@ -44,15 +44,15 @@ no auto-summary
 ip access-list standard BRANCH-OFFICE-POLICY
 permit host 192.168.30.3
 permit 192.168.40.0 0.0.0.255
-end
+exit
 
-interface g0/1
+interface f0/1
 ip access-group BRANCH-OFFICE-POLICY out
 exit
 ip access-list standard BRANCH-OFFICE-POLICY
 30 permit 209.165.200.224 0.0.0.31
 40 deny any
-end
+exit
 
 ISP
 en
@@ -74,7 +74,7 @@ password cisco
 login
 transport input telnet
 
-interface s0/0/0 
+interface s0/1/0 
 ip address 10.1.1.2 255.255.255.252
 no sh
 exit
@@ -84,7 +84,7 @@ ip address 209.165.200.225 255.255.255.224
 no sh
 exit
 
-inteface s0/0/1
+interface s0/1/1
 ip address 10.2.2.2 255.255.255.252
 clock rate 128000
 no sh 
@@ -95,6 +95,7 @@ version 2
 network 209.165.200.224
 network 10.0.0.0
 no auto-summary
+exit
 
 R3
 en
@@ -126,7 +127,7 @@ ip address 192.168.40.1 255.255.255.0
 no sh
 exit
 
-inteface s0/0/1 
+interface s0/1/1 
 ip address 10.2.2.1 255.255.255.252
 clock rate 128000
 no sh 
@@ -144,14 +145,14 @@ access-list 1 permit 192.168.10.0 0.0.0.255
 access-list 1 permit 192.168.20.0 0.0.0.255
 
 
-interface g0/1
+interface f0/1
 ip access-group 1 out
 
 S1
 en
 conf t
 no ip domain-lookup
-hstname S1
+hostname S1
 
 banner motd #
 Unauthorized access is strictly prohibited. #
@@ -178,7 +179,7 @@ S3
 en
 conf t
 no ip domain-lookup
-hstname S3
+hostname S3
 
 banner motd #
 Unauthorized access is strictly prohibited. #
