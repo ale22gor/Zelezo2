@@ -1,4 +1,6 @@
 R1
+en
+conf t
 no ip domain-lookup
 hostname R1
 
@@ -19,6 +21,8 @@ no sh
 exit
 
 S1
+en
+conf t
 no ip domain-lookup
 hostname S1
 
