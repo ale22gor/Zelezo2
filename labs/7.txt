@@ -28,7 +28,7 @@ ip address 192.168.20.1 255.255.255.0
 no sh
 exit
 
-interface s0/1/0 
+interface s0/3/0 
 ip address 10.1.1.1 255.255.255.252
 clock rate 128000
 no sh 
@@ -74,7 +74,7 @@ password cisco
 login
 transport input telnet
 
-interface s0/1/0 
+interface s0/3/0 
 ip address 10.1.1.2 255.255.255.252
 no sh
 exit
@@ -84,7 +84,7 @@ ip address 209.165.200.225 255.255.255.224
 no sh
 exit
 
-interface s0/1/1
+interface s0/3/1
 ip address 10.2.2.2 255.255.255.252
 clock rate 128000
 no sh 
