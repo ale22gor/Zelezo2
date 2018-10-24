@@ -22,7 +22,7 @@ ip address 192.168.1.1 255.255.255.0
 no sh
 exit
 
-interface s0/1/1
+interface s0/3/1
 ip address 209.165.200.225 255.255.255.252
 no sh
 exit
@@ -32,9 +32,9 @@ ip route 0.0.0.0 0.0.0.0 s0/1/1
 interface f0/1
 ip nat inside
 exit
-interface s0/1/0
+interface s0/3/0
 ip nat outside
-interface s0/1/1
+interface s0/3/1
 exit
 
 ip access-list standard NAT_ACL
@@ -71,7 +71,7 @@ ip address 198.133.219.1 255.255.255.255
 no sh
 exit
 
-interface s0/1/0
+interface s0/3/0
 ip address 209.165.200.226 255.255.255.252
 clock rate 128000
 no sh
