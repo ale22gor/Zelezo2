@@ -86,7 +86,6 @@ exit
 
 interface s0/3/1
 ip address 10.2.2.2 255.255.255.252
-clock rate 128000
 no sh 
 exit
 
@@ -127,7 +126,7 @@ ip address 192.168.40.1 255.255.255.0
 no sh
 exit
 
-interface s0/1/1 
+interface s0/3/1 
 ip address 10.2.2.1 255.255.255.252
 clock rate 128000
 no sh 
